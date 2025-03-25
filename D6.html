@@ -80,8 +80,9 @@
                      */
 
       const changeTitle = function () {
-        const title = document.querySelector("h1");
-        title.innerText = "This is another title";
+        const h1 = document.querySelector("h1");
+        // const h1 = document.getElementsByTagName("h1")[0];
+        h1.innerText = "This is another title";
       };
 
       changeTitle();
@@ -91,8 +92,9 @@
                      */
 
       const addClassToTitle = function () {
-        const title = document.querySelector("h1");
-        title.className = "myHeading";
+        const h1 = document.querySelector("h1");
+        h1.className = "myHeading"; // if there aren't other classes
+        // h1.classList.add("myHeading"); // if there are other classes, we add it next to it
       };
 
       addClassToTitle();
@@ -100,7 +102,7 @@
                         Scrivi una funzione che cambi il testo dei p figli di un div
                        */
 
-      const changePcontent = function () {
+      /*  const changePcontent = function () {
         const allDiv = document.querySelectorAll("div");
         for (let i = 0; i < allDiv.length; i++) {
           // console.log(allDiv[i]);
@@ -112,8 +114,16 @@
         }
       };
 
-      changePcontent();
+      changePcontent(); */
+      const changePcontent = function () {
+        const pOfDiv = document.querySelectorAll("div p");
+        console.log(pOfDiv);
 
+        pOfDiv.forEach((p) => {
+          p.innerText = "child of div";
+        });
+      };
+      changePcontent();
       /* ESERCIZIO 4
                         Scrivi una funzione che cambi la proprietà href di ogni link (tranne quello nel footer) con il valore https://www.google.com
                        */
@@ -129,6 +139,18 @@
 
            changeUrls();
       */
+      const changeUrls = function () {
+        const links = document.querySelectorAll("a:not(footer a)");
+        console.log(links);
+
+        links.forEach((a) => {
+          a.href = "https://www.google.com";
+          a.innerText = "Go To Google";
+          a.target = "_blank";
+        });
+      };
+      changeUrls();
+
       /* ESERCIZIO 5
                         Scrivi una funzione che aggiunga un nuovo elemento lista alla seconda lista non ordinata
                      */
@@ -141,12 +163,22 @@
       };
 
       addToTheSecond();
+
+      /*  const addToTheSecond = function (txt) {
+        const secondList = document.getElementById("secondList");
+        const newListItem = document.createElement("li");
+        newListItem.innerText = txt;
+        secondList.appendChild(newListItem);
+      };
+
+      addToTheSecond(4th);
+      addToTheSecond(5th); */ // dynamic text added
       /* ESERCIZIO 6
                         Scrivi una funzione che aggiunga un paragrafo al primo div
                      */
 
       const addParagraph = function () {
-        const firstDiv = document.querySelector("div");
+        const firstDiv = document.querySelector("div"); // const secondDiv =  document.querySelector("div:nth-of-type(2)");
         const newP = document.createElement("p");
         newP.innerText = "This is a new paragraph";
         firstDiv.appendChild(newP);
@@ -158,33 +190,54 @@
 
       const hideFirstUl = function () {
         const firstList = document.getElementById("firstList");
-        firstList.style.display = "none";
+        firstList.style.display = "none"; // to hide it
+        // firstList.remove()             // to remove it
       };
       hideFirstUl();
       /* ESERCIZIO 8
                         Scrivi una funzione che renda verde il background di ogni lista non ordinata
                        */
 
-      const paintItGreen = function () {
+      /*    const paintItGreen = function () {
         const allUl = document.getElementsByTagName("ul");
         for (let i = 0; i < allUl.length; i++) {
           allUl[i].style.backgroundColor = "green";
         }
       };
 
+      paintItGreen(); */
+
+      const paintItGreen = function () {
+        const allUl = document.querySelectorAll("ul");
+        allUl.forEach((ul) => {
+          ul.style.backgroundColor = "green";
+        });
+      };
+
       paintItGreen();
+
       /* ESERCIZIO 9
                         Scrivi una funzione che rimuova l'ultima lettera dall'h1 ogni volta che l'utente lo clicca
                        */
 
-      const makeItClickable = function () {};
+      const makeItClickable = function () {
+        const h1 = document.querySelector("h1");
+        h1.onclick = function () {
+          h1.innerText = h1.innerText.slice(0, -1);
+        };
+      };
 
+      makeItClickable();
       /* ESERCIZIO 10
                         Crea una funzione che, al click sul footer, riveli l'URL del link interno come contenuto di un alert()
                        */
 
-      const revealFooterLink = function () {};
+      const revealFooterLink = function () {
+        const footer = document.querySelector("footer");
+        footer.onclick = function () {};
+      };
 
+      revealFooterLink();
       /* ESERCIZIO 11
                         Crea una funzione che crei una tabella nell'elemento con id "tableArea".
                         La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
@@ -208,7 +261,16 @@
                        Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
                      */
 
-      const changeColorWithRandom = function () {};
+      const changeColorWithRandom = function () {
+        const h2 = document.getElementById("changeMyColor");
+
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+
+        h2.style.backgroundColor = `rgb(${r} ${g} ${b} / 100%)`;
+      };
+      changeColorWithRandom();
     </script>
   </body>
 </html>
